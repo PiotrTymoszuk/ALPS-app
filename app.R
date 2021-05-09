@@ -117,7 +117,7 @@
                      href = 'https://inneremed2.tirol-kliniken.at/page.cfm?vpath=forschung/gesundheit-nach-covid-19'), 
                    'in Tyrol/Austria.', 
                    style = 'font-size:20px; color: black'),
-                br(), 
+                hr(), 
                 h3(strong('Long COVID Prediction Score calculation', 
                           style = 'color:#5d86bb; font-family:Helvetica')), 
                 br(), 
@@ -126,7 +126,7 @@
                 br(), 
                 h4(textOutput('chronic_score'), ## Text output of the calculated score
                    style = 'font-size:20px; color: black'), 
-                br(), 
+                hr(), 
                 h3(strong('Prediction by modeling'), 
                    style = 'color:#5d86bb; font-family:Helvetica'), 
                 br(), 
@@ -139,7 +139,7 @@
                 plotOutput('chronic_mod_plot', ## graphical representation of the calculated risk and 95% CI
                            width = '60%', 
                            height = '150px'), 
-                br(), 
+                hr(), 
                 h3(strong('Real-life prevalence'), 
                    style = 'color:#5d86bb; font-family:Helvetica'), 
                 br(), 
@@ -148,7 +148,14 @@
                 br(), 
                 plotOutput('chronic_real_plot', ## prevalence of long COVID associated with the calculated score in the establishment cohort, plot output
                            width = '60%', 
-                           height = '600px'))
+                           height = '600px'), 
+                hr(), 
+                HTML("<div style =  'text-align: right'>
+                      <img src = '' width = 80%>
+                      <p>Powered by </p>
+                      <img src = 'logo_large.png' width = 60>
+                      <img src = '' width = 30>
+                      <img src = 'shiny_logo.png' width = 60></div>"))
       
     )
   )
