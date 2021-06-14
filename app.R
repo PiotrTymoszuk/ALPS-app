@@ -16,21 +16,53 @@
 # User interface -----
 
   ui <- fluidPage(
+     
+     ## some styling
+     
+     tags$head(
+        tags$style(
+           "
+            .title {
+                background: url('shiny_banner.png');
+                background-repeat: no-repeat; 
+                background-size: cover;
+                font-size: 50px;
+                color: #2d476c;
+                font-family: Bahnschrift, Verdana, Helvetica;
+                text-shadow: 1px 1px #e2e2e2; 
+                padding-left: 3%
+            }
+            
+            h2{
+            color:#5d86bb; 
+            font-family: Bahnschrift, Verdana, Helvetica
+            }
+               
+            h3 {
+            color:#5d86bb; 
+            font-family: Bahnschrift, Verdana, Helvetica
+            }
+            
+           h4 {
+           font-size: 20px; 
+           color: black; 
+           font-family: Calibri, Helvetica
+           }
+            "
+        )
+     ),
       
      ## Title panel with the logos and names
      
-     titlePanel(title =  HTML("<div style = 'font-size:50px; 
-                                    color:#5d86bb; 
-                                    font-family:Helvetica; 
-                                    text-shadow: 2px 2px AliceBlue'>
+     titlePanel(title =  HTML("<div class = 'title'>
                                  <strong>ALPS</strong>
                                  <img src = '' width = 1400>
-                                 <img src = 'mui_logo.jpg' width = 90><br/>
+                                 <img src = 'mui_logo.png' width = 7.5%><br/>
                                  <strong>A</strong>ustrian 
                                  <strong>L</strong>ong COVID 
                                  <strong>P</strong>rediction
-                                 <strong>S</strong>ore<br/><div/>
-                                 <hr style = 'height:5px'>"), 
+                                 <strong>S</strong>core<br/><div/>
+                                 <hr style = 'height: 5px'>"), 
                 windowTitle = 'ALPS Calculator'), 
      
     ## Side panel with user's entries.
@@ -104,58 +136,53 @@
                    br(), 
                    br(), 
                    downloadButton('downloadReport', 
-                                  label = 'Download report')),
+                                  label = 'Download report'), 
+                   hr(), 
+                   HTML("<div style =  'text-align: right'>
+                      <img src = '' width = 80%>
+                      <p>Powered by </p>
+                      <a href = 'http://www.daas.tirol'>
+                      <img src = 'logo_large.png' width = 60 alt = 'daas.tirol'>
+                      </a>
+                      <img src = '' width = 30>
+                      <img src = 'shiny_logo.png' width = 60></div>")),
       
       ## Main panel to hold the dynamic output
       
-      mainPanel(h2(strong('Risk of long COVID'), 
-                   style = 'color:#5d86bb; font-family:Helvetica'),
+      mainPanel(h2(strong('Risk of long COVID')),
                 br(), 
                 h4('Long COVID is defined as presence of at least one post-acute persistent symptom of COVID-19 for 28 days or longer after symptom onset. 
                    Score development, modeling of long COVID risk and real-life prevalence data are based on the results of the', 
                    a('Health after COVID-19 study', 
                      href = 'https://inneremed2.tirol-kliniken.at/page.cfm?vpath=forschung/gesundheit-nach-covid-19'), 
                    'in Tyrol/Austria.', 
-                   style = 'font-size:20px; color: black'),
+                   style = 'font-size: 20px; color: black; font-family: Calibri, Helvetica'),
                 hr(), 
-                h3(strong('Long COVID Prediction Score calculation', 
-                          style = 'color:#5d86bb; font-family:Helvetica')), 
+                h3(strong('Long COVID Prediction Score calculation')), 
                 br(), 
                 div(tableOutput('chronic_components'), ## Tabular output of the particular ALPS components
                     style = 'font-size:120%'), 
                 br(), 
-                h4(textOutput('chronic_score'), ## Text output of the calculated score
-                   style = 'font-size:20px; color: black'), 
+                h4(textOutput('chronic_score')), ## Text output of the calculated score 
                 hr(), 
-                h3(strong('Prediction by modeling'), 
-                   style = 'color:#5d86bb; font-family:Helvetica'), 
+                h3(strong('Prediction by modeling')), 
                 br(), 
-                h4('Risk estimate obtained by logistic regression (n = 1009).', 
-                   style = 'font-size:20px; color: black'), 
+                h4('Risk estimate obtained by logistic regression (n = 1009).'), 
                 br(), 
-                h4(textOutput('chronic_risk'), ## Estimated risk with 95% CI linked to the calculated ALPS, text ouput
-                   style = 'font-size:20px; color: black'), 
+                h4(textOutput('chronic_risk')), ## Estimated risk with 95% CI linked to the calculated ALPS, text ouput 
                 br(), 
                 plotOutput('chronic_mod_plot', ## graphical representation of the calculated risk and 95% CI
                            width = '60%', 
                            height = '150px'), 
                 hr(), 
-                h3(strong('Real-life prevalence'), 
-                   style = 'color:#5d86bb; font-family:Helvetica'), 
+                h3(strong('Real-life prevalence')), 
                 br(), 
-                h4('Long COVID Prediction Score value and prevalence of long COVID in the study cohort.', 
-                   style = 'font-size:20px; color: black'), 
+                h4('Long COVID Prediction Score value and prevalence of long COVID in the study cohort.'), 
                 br(), 
                 plotOutput('chronic_real_plot', ## prevalence of long COVID associated with the calculated score in the establishment cohort, plot output
                            width = '60%', 
                            height = '600px'), 
-                hr(), 
-                HTML("<div style =  'text-align: right'>
-                      <img src = '' width = 80%>
-                      <p>Powered by </p>
-                      <img src = 'logo_large.png' width = 60>
-                      <img src = '' width = 30>
-                      <img src = 'shiny_logo.png' width = 60></div>"))
+                hr())
       
     )
   )
